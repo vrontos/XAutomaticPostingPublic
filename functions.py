@@ -17,6 +17,7 @@ def decide_topic():
     rand_topics = {"bitcoin": 3,
                    "starlink": 3,
                    "polymarket": 3,
+                   "solar energy": 2,
                    "interest rates": 2, 
                    "llm": 2,
                    "ai": 2, 
