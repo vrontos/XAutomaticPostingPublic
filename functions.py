@@ -15,7 +15,6 @@ OAUTH_TOKEN_SECRET = os.environ.get("OAUTH_TOKEN_SECRET")
 def decide_topic():
     # Dictionary with topics and their corresponding weights
     rand_topics = {"bitcoin": 3,
-                   "inflation": 3, 
                    "starlink": 3,
                    "polymarket": 3,
                    "interest rates": 2, 
@@ -25,6 +24,7 @@ def decide_topic():
                    "trump": 2,
                    "nvidia": 2,
                    "tesla": 2,
+                   "inflation": 1,
                    "blockchain": 1,
                    "dogecoin": 1,
                    "humanoid robots": 1,
