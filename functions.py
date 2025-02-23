@@ -1,14 +1,11 @@
 import random
-from networkx import dedensify
 import requests
 from textwrap import dedent
 import google.generativeai as genai
 
-import os
-import json
 from requests_oauthlib import OAuth1Session
 from config import NEWS_API_ORG_KEY, GEMINI_API_KEY, X_API_KEY, X_API_SECRET_KEY
-
+from config import OAUTH_TOKEN, OAUTH_TOKEN_SECRET
 
 def decide_topic():
     # Dictionary with topics and their corresponding weights
@@ -158,20 +155,12 @@ Based on the above, create a unique X post.
     return response.text
 
 def post_on_x(text):
-    # Dynamically locate the directory where *this* file is located
-    current_dir = os.path.dirname(os.path.realpath(__file__))
-    token_file = os.path.join(current_dir, "tokens.json")
-    
-    # Read tokens from the JSON file
-    with open(token_file, "r", encoding="utf-8") as f:
-        tokens = json.load(f)
-    
-    # Create an OAuth1 session
+    # Use credentials directly from config.py
     oauth = OAuth1Session(
         X_API_KEY,
         client_secret=X_API_SECRET_KEY,
-        resource_owner_key=tokens["oauth_token"],
-        resource_owner_secret=tokens["oauth_token_secret"]
+        resource_owner_key=OAUTH_TOKEN,
+        resource_owner_secret=OAUTH_TOKEN_SECRET
     )
     
     # Post the tweet
