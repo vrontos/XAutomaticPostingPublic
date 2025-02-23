@@ -144,6 +144,7 @@ Generate an engaging and creative X post (tweet) using the following input:
 I will provide you with some fresh articles. Choose randomly one of them as a source of inspiration for creating the X post. 
 Generally, try to be based and not woke.
 There is not need to add hashtags to the post.
+At the end give me only the text that I can post on X, without any comments or stuff that shouldnt be posted.
 
 News Articles:
 {articles}
