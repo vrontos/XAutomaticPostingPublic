@@ -141,7 +141,7 @@ def call_llm_for_post_creation(articles, prompt_style, good_examples):
     prompt = f"""
 Generate an engaging and creative X post (tweet) using the following input:
 
-I will provide you with some fresh articles so you can get inspiration.
+I will provide you with some fresh articles. Choose randomly one of them as a source of inspiration for creating the X post. 
 Generally, try to be based and not woke.
 There is not need to add hashtags to the post.
 
