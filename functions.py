@@ -2,6 +2,7 @@ import random
 import requests
 from textwrap import dedent
 import google.generativeai as genai
+import os
 
 from requests_oauthlib import OAuth1Session
 NEWS_API_ORG_KEY = os.environ.get("NEWS_API_ORG_KEY")
