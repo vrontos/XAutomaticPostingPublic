@@ -1,0 +1,29 @@
+name: Run XAutomaticPosting
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-posting:
+    runs-on: ubuntu-latest
+    env:
+      NEWS_API_ORG_KEY: ${{ secrets.NEWS_API_ORG_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      X_API_KEY: ${{ secrets.X_API_KEY }}
+      X_API_SECRET_KEY: ${{ secrets.X_API_SECRET_KEY }}
+      OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }}
+      OAUTH_TOKEN_SECRET: ${{ secrets.OAUTH_TOKEN_SECRET }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests requests_oauthlib google-generativeai
+      - name: Run XAutomaticPosting script
+        run: python XAutomaticPosting.py
