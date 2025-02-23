@@ -1,0 +1,3 @@
+News: 100/day (https://newsapi.org/pricing)
+Gemini: 1500/day
+X: 1500/month --> this is the bottleneck! --> can do ca. 50 posts / day
