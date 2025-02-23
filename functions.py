@@ -75,7 +75,7 @@ def decide_prompt_style():
     # Dictionary with prompt styles and their corresponding weights
     prompt_styles = {
         "posing an engaging question": 4,
-        "use one or two difficult words but do not overdo it": 4,
+        "use one or maximal two difficult words do not overdo it": 4,
         "use three or four lines of text with each separated from one another with an empty line": 3,
         "edgy": 3,
         "positive and optimistic": 3,
