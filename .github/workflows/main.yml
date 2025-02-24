@@ -5,26 +5,16 @@ on:
     # 8 runs around noon (irregular minutes)
     - cron: '2 12 * * *'
     - cron: '14 12 * * *'
-    - cron: '21 12 * * *'
-    - cron: '33 12 * * *'
-    - cron: '40 12 * * *'
-    - cron: '46 12 * * *'
     - cron: '52 12 * * *'
     - cron: '59 12 * * *'
     # 8 runs around 6PM (irregular minutes)
     - cron: '5 18 * * *'
-    - cron: '12 18 * * *'
     - cron: '19 18 * * *'
-    - cron: '27 18 * * *'
     - cron: '34 18 * * *'
-    - cron: '41 18 * * *'
     - cron: '50 18 * * *'
-    - cron: '57 18 * * *'
     # 4 runs around midnight (irregular minutes)
     - cron: '3 0 * * *'
-    - cron: '18 0 * * *'
     - cron: '36 0 * * *'
-    - cron: '49 0 * * *'
   workflow_dispatch:
 
 jobs:
