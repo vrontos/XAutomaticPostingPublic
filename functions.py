@@ -42,8 +42,8 @@ def retrieve_articles(topic):
     params = {
         "q": f'"{topic}"',
         "language": "en",
-        "sortBy": "publishedAt",  # "popularity" or "publishedAt" for chronological sorting
-        "pageSize": 8,
+        "sortBy": "popularity",  # "popularity" or "publishedAt" for chronological sorting
+        "pageSize": 5,
         "apiKey": NEWS_API_ORG_KEY
     }
 
