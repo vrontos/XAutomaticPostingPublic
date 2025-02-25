@@ -32,7 +32,7 @@ def decide_topic():
         "5G", "climate tech", "moon mining", "nano technology", "canada", "russia", "greece", "poland", "germany", "france", "plane"
         "elon vs. zuck", "cardano", "physics", "mathematics", "smart cities",
         "defi hacks", "battery breakthroughs", "crypto", "melania", "virtual reality", "augemented reality",
-        "playstation", "xbox", "6G", "fusion", "battery", "lithium"
+        "playstation", "xbox", "6G", "fusion", "battery", "lithium", "grok", "gemini", "chatgpt", "openai", "google", "apple"
     ]
     
     # Randomly choose a topic with equal probability
