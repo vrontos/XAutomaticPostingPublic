@@ -18,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/vrontos/xautomaticposting:latest
+      credentials:
+        username: vrontos
+        password: ${{ secrets.GHCR_PAT }}
     env:
       TERM: xterm-256color
       NEWS_API_ORG_KEY: ${{ secrets.NEWS_API_ORG_KEY }}
