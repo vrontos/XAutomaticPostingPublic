@@ -2,15 +2,10 @@ import random
 import requests
 from textwrap import dedent
 import google.generativeai as genai
-import os
 
 from requests_oauthlib import OAuth1Session
-NEWS_API_ORG_KEY = os.environ.get("NEWS_API_ORG_KEY")
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-X_API_KEY = os.environ.get("X_API_KEY")
-X_API_SECRET_KEY = os.environ.get("X_API_SECRET_KEY")
-OAUTH_TOKEN = os.environ.get("OAUTH_TOKEN")
-OAUTH_TOKEN_SECRET = os.environ.get("OAUTH_TOKEN_SECRET")
+from config import NEWS_API_ORG_KEY, GEMINI_API_KEY, X_API_KEY, X_API_SECRET_KEY
+from config import OAUTH_TOKEN, OAUTH_TOKEN_SECRET
 
 def green_text(text):
     # Wrap the text in green ANSI escape codes
@@ -52,11 +47,12 @@ def decide_prompt_style():
         "use one or maximal two difficult words do not overdo it",
         "use three or four lines of text with each separated from one another with an empty line",
         "edgy",
-        "talk a little like this: like bruh fr fr he cooked ngl tho fam... you get the point (dont overdo it though)",
-        "say: be [some-name] (new-line) > text (new-line) > text etc ",
+        "use casual slang lightly like bruh or fam",
+        "write as a character with > before actions like Be Elon > Builds rocket > Flies to Mars",
         "positive and optimistic",
         "a little bit provoking",
         "funny",
+        "add one emoji",
         "inspirational",
         "witty",
         "posing a simple and straightforward super-engaging question in a rather short post",
