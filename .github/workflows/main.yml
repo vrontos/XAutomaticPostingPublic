@@ -2,20 +2,16 @@ name: Run XAutomaticPosting
 
 on:
   schedule:
-    # 8 runs around noon (irregular minutes)
-    - cron: '2 12 * * *'
-    - cron: '14 12 * * *'
-    - cron: '52 12 * * *'
-    - cron: '59 12 * * *'
-    # 8 runs around 6PM (irregular minutes)
-    - cron: '5 18 * * *'
-    - cron: '19 18 * * *'
-    - cron: '34 18 * * *'
-    - cron: '50 18 * * *'
-    # 4 runs around midnight (irregular minutes)
-    - cron: '3 0 * * *'
-    - cron: '36 0 * * *'
-  workflow_dispatch:
+    # 8 runs from ~10:00 to ~22:00 CET (Berlin time), adjusted to UTC
+    - cron: '7 9 * * *'    # 09:07 UTC = 10:07 CET
+    - cron: '42 10 * * *'  # 10:42 UTC = 11:42 CET
+    - cron: '19 12 * * *'  # 12:19 UTC = 13:19 CET
+    - cron: '55 13 * * *'  # 13:55 UTC = 14:55 CET
+    - cron: '33 15 * * *'  # 15:33 UTC = 16:33 CET
+    - cron: '12 17 * * *'  # 17:12 UTC = 18:12 CET
+    - cron: '48 18 * * *'  # 18:48 UTC = 19:48 CET
+    - cron: '25 21 * * *'  # 21:25 UTC = 22:25 CET
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   run-posting:
