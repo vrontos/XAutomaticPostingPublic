@@ -16,10 +16,6 @@ def green_text(text):
     # Wrap the text in green ANSI escape codes
     print(f"\033[32m{text}\033[0m")
 
-def orange_text(text):
-    # Wrap the text in orange ANSI escape codes
-    print(f"\033[33m{text}\033[0m", end=" ")
-
 def decide_topic():
     # List of topics with equal probability
     topics = [
@@ -190,7 +186,7 @@ Good X Post Examples:
 Based on the above, create a unique X post.
 """
     model = genai.GenerativeModel("gemini-2.0-flash")        
-    orange_text(prompt)
+    green_text(prompt)
     response = model.generate_content(prompt)
     return response.text
 
