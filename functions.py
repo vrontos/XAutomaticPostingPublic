@@ -4,6 +4,7 @@ from textwrap import dedent
 import google.generativeai as genai
 
 from requests_oauthlib import OAuth1Session
+import os
 NEWS_API_ORG_KEY = os.environ.get("NEWS_API_ORG_KEY")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 X_API_KEY = os.environ.get("X_API_KEY")
