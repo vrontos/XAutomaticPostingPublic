@@ -38,7 +38,7 @@ if use_news_api_org:
 # 6. Call Gemini LLM to create an X post
 prompt, post_created_from_llm = call_llm_for_post_creation(prompt_style, topic, post_length, articles)
 print("\nPROMPT:")
-blue_text(prompt)
+green_text(prompt)
 print(f"\n### Generated X post:")
 print(f"- TOPIC: {topic}")
 print(f"- LENGTH: {post_length}")
