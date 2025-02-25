@@ -16,6 +16,9 @@ def green_text(text):
     # Wrap the text in green ANSI escape codes
     print(f"\033[32m{text}\033[0m")
 
+def blue_text(text):
+    print(f"\033[34m{text}\033[0m", flush=True)
+
 def decide_topic():
     # List of topics with equal probability
     topics = [
@@ -30,10 +33,10 @@ def decide_topic():
         "genetic engineering", "elon’s mars plan", "mars", "xrp", "tech layoffs",
         "hydrogen power", "privacy coins", "gamestop", "augmented reality",
         "supply chain tech", "biden’s economic policy", "apple’s next big thing",
-        "5G", "climate tech", "moon mining", "nano technology", "canada", "russia", "greece", "poland", "germany", "france", "plane"
+        "5G", "climate tech", "moon mining", "nano technology", "canada", "russia", "greece", "poland", "germany", "france", "plane",
         "elon vs. zuck", "cardano", "physics", "mathematics", "smart cities",
         "defi hacks", "battery breakthroughs", "crypto", "melania", "virtual reality", "augemented reality",
-        "playstation", "xbox", "6G", "fusion", "battery", "lithium", "grok", "gemini", "chatgpt", "openai", "google", "apple"
+        "playstation", "xbox", "6G", "fusion", "battery", "lithium", "grok", "gemini", "chatgpt", "openai", "google", "apple",
     ]
     
     # Randomly choose a topic with equal probability
@@ -186,9 +189,8 @@ Good X Post Examples:
 Based on the above, create a unique X post.
 """
     model = genai.GenerativeModel("gemini-2.0-flash")        
-    green_text(prompt)
     response = model.generate_content(prompt)
-    return response.text
+    return prompt, response.text
 
 def post_on_x(text):
     # Use credentials directly from config.py
