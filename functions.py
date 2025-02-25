@@ -22,14 +22,14 @@ def decide_topic():
         "llm", "ai", "musk", "trump", "nvidia", "tesla", "inflation",
         "blockchain", "dogecoin", "humanoid robots", "federal reserve", "europe",
         "recession", "quantum computing", "space travel", "ethereum",
-        "hyperloop", "elon’s tweets", "crypto regulation", "artificial general intelligence",
+        "hyperloop", "crypto regulation", "artificial general intelligence",
         "gold prices", "neuralink", "tech stocks", "energy crisis", "decentralized finance",
         "web3", "metaverse", "self-driving cars", "fusion energy", "cybersecurity",
         "spacex launches", "central bank digital currencies", "robotics automation",
         "genetic engineering", "elon’s mars plan", "mars", "xrp", "tech layoffs",
         "hydrogen power", "privacy coins", "gamestop", "augmented reality",
         "supply chain tech", "biden’s economic policy", "apple’s next big thing",
-        "5G", "climate tech", "moon mining", "nano technology", "canada",
+        "5G", "climate tech", "moon mining", "nano technology", "canada", "russia", "greece", "poland", "germany", "france", "plane"
         "elon vs. zuck", "cardano", "physics", "mathematics", "smart cities",
         "defi hacks", "battery breakthroughs", "crypto", "melania", "virtual reality", "augemented reality",
         "playstation", "xbox", "6G", "fusion", "battery", "lithium"
