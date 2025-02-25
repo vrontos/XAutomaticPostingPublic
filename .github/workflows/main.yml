@@ -17,7 +17,7 @@ jobs:
   run-posting:
     runs-on: ubuntu-latest
     container:
-      image: vrontos/xautomaticposting:latest
+      image: ghcr.io/vrontos/xautomaticposting:latest
     env:
       TERM: xterm-256color
       NEWS_API_ORG_KEY: ${{ secrets.NEWS_API_ORG_KEY }}
