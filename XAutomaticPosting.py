@@ -47,5 +47,5 @@ print(f"- STYLES: {prompt_style}\n")
 green_text(post_created_from_llm)
 
 # Post on X
-post_on_x(post_created_from_llm)
-print("Posted successfully on X!🚀")
+#post_on_x(post_created_from_llm)
+#print("Posted successfully on X!🚀")
