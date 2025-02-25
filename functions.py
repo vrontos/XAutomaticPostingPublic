@@ -208,5 +208,12 @@ def post_on_x(text):
         headers={"Content-Type": "application/json"}
     )
     
+    # Check for errors
     if response.status_code != 201:
-        raise Exception(f"Error: {response.status_code} {response.text}")
+        if response.status_code == 429:
+            # Log a warning and skip posting if rate-limited
+            print(f"Warning: Rate limit exceeded (429): {response.text}. Skipping post.")
+        else:
+            raise Exception(f"Error: {response.status_code} {response.text}")
+    else:
+        print("Posted successfully on X!🚀")
