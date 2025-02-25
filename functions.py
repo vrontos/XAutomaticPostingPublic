@@ -12,38 +12,96 @@ X_API_SECRET_KEY = os.environ.get("X_API_SECRET_KEY")
 OAUTH_TOKEN = os.environ.get("OAUTH_TOKEN")
 OAUTH_TOKEN_SECRET = os.environ.get("OAUTH_TOKEN_SECRET")
 
+def green_text(text):
+    # Wrap the text in green ANSI escape codes
+    print(f"\033[32m{text}\033[0m")
+
+def blue_text(text):
+    # Wrap the text in blue ANSI escape codes
+    print(f"\033[34m{text}\033[0m")
+
 def decide_topic():
-    # Dictionary with topics and their corresponding weights
-    rand_topics = {"bitcoin": 3,
-                   "starlink": 3,
-                   "polymarket": 3,
-                   "solar energy": 2,
-                   "interest rates": 2, 
-                   "llm": 2,
-                   "ai": 2, 
-                   "musk": 2,
-                   "trump": 2,
-                   "nvidia": 2,
-                   "tesla": 2,
-                   "inflation": 1,
-                   "blockchain": 1,
-                   "dogecoin": 1,
-                   "humanoid robots": 1,
-                   "federal reserve": 1,
-                   }
+    # List of topics with equal probability
+    topics = [
+"bitcoin", "starlink", "polymarket", "solar energy", "renewables", "interest rates",
+        "llm", "ai", "musk", "trump", "nvidia", "tesla", "inflation",
+        "blockchain", "dogecoin", "humanoid robots", "federal reserve", "europe",
+        "recession", "quantum computing", "space travel", "ethereum",
+        "hyperloop", "elon’s tweets", "crypto regulation", "artificial general intelligence",
+        "gold prices", "neuralink", "tech stocks", "energy crisis", "decentralized finance",
+        "web3", "metaverse", "self-driving cars", "fusion energy", "cybersecurity",
+        "spacex launches", "central bank digital currencies", "robotics automation",
+        "genetic engineering", "elon’s mars plan", "mars", "xrp", "tech layoffs",
+        "hydrogen power", "privacy coins", "gamestop", "augmented reality",
+        "supply chain tech", "biden’s economic policy", "apple’s next big thing",
+        "5G", "climate tech", "moon mining", "nano technology", "canada",
+        "elon vs. zuck", "cardano", "physics", "mathematics", "smart cities",
+        "defi hacks", "battery breakthroughs", "crypto", "melania", "virtual reality", "augemented reality",
+        "playstation", "xbox", "6G", "fusion", "battery", "lithium"
+    ]
     
-    # Randomly choose a topic based on its weight
-    chosen_topic = random.choices(list(rand_topics.keys()), weights=list(rand_topics.values()), k=1)[0]
+    # Randomly choose a topic with equal probability
+    chosen_topic = random.choice(topics)
     
     return chosen_topic
+
+def decide_prompt_style():
+    # List of prompt styles with equal probability
+    prompt_styles = [
+        "posing an engaging question",
+        "use one or maximal two difficult words do not overdo it",
+        "use three or four lines of text with each separated from one another with an empty line",
+        "edgy",
+        "talk a little like this: like bruh fr fr he cooked ngl tho fam... you get the point (dont overdo it though)",
+        "say: be [some-name] (new-line) > text (new-line) > text etc ",
+        "positive and optimistic",
+        "a little bit provoking",
+        "funny",
+        "inspirational",
+        "witty",
+        "posing a simple and straightforward super-engaging question in a rather short post",
+        "a little bit aggressive",
+        "sarcastic",
+        "whimsical",
+        "ironeous",
+        "a bit pessimistic",
+        "confidently bold",
+        "subtly mocking",
+        "futuristic and visionary",
+        "dry humor",
+        "curious and probing",
+        "slightly exaggerated",
+        "matter-of-fact",
+        "rebellious tone",
+    ]
+    
+    # Pick three unique styles randomly with equal probability
+    chosen_styles = random.sample(prompt_styles, k=3)
+    
+    # Return the styles as a comma-separated string
+    return ", ".join(chosen_styles)
+
+def decide_post_length():
+    # List of post lengths with equal probability
+    lengths = [
+        "short (under 100 characters)",
+        "medium (100-200 characters)",
+        "long (200-280 characters)"
+    ]
+    
+    # Randomly choose a length with equal probability
+    chosen_length = random.choice(lengths)
+    
+    return chosen_length
 
 def retrieve_articles(topic):
     url = "https://newsapi.org/v2/everything"
     params = {
         "q": f'"{topic}"',
         "language": "en",
-        "sortBy": "popularity",  # "popularity" or "publishedAt" for chronological sorting
-        "pageSize": 5,
+        "sortBy": "publishedAt",  # "popularity" or "publishedAt" for chronological sorting
+        "pageSize": 8,
+        "searchIn": "title,description",  # Restrict search to title and description only
         "apiKey": NEWS_API_ORG_KEY
     }
 
@@ -51,7 +109,7 @@ def retrieve_articles(topic):
     if response.status_code == 200:
         data = response.json()
         total_results = data.get("totalResults", 0)
-        print("\nTotal articles found:", total_results)
+        print("Total articles found:", total_results)
         
         articles_data = data.get("articles", [])
         articles = ""
@@ -72,92 +130,66 @@ def retrieve_articles(topic):
         error_message = f"Error fetching articles: {response.status_code}"
         return error_message
 
-def decide_prompt_style():
-    # Dictionary with prompt styles and their corresponding weights
-    prompt_styles = {
-        "posing an engaging question": 4,
-        "use one or maximal two difficult words do not overdo it": 4,
-        "use three or four lines of text with each separated from one another with an empty line": 3,
-        "edgy": 3,
-        "positive and optimistic": 3,
-        "a little bit provoking": 3,
-        "funny": 3,
-        "inspirational": 3,
-        "witty": 2,
-        "posing a simple and straigtforward super-engaging question in a rather short post": 2,
-        "a little bit aggressive": 1,
-        "sarcastic": 1,
-        "whimsical": 1,
-        "ironeous": 1,
-        "a bit pessimistic": 1
-    }
-    
-    # Pick three unique styles based on their weights
-    chosen_styles = set()
-    while len(chosen_styles) < 3:
-        style = random.choices(
-            list(prompt_styles.keys()),
-            weights=list(prompt_styles.values()),
-            k=1
-        )[0]
-        chosen_styles.add(style)
-        
-    # Return the styles as a comma-separated string
-    return ", ".join(chosen_styles)
+# Define good examples at module level
+good_x_post_examples = [
+    "The souls of people are incredible, it's the interface that's manipulated",
+    "We live in the best timeline",
+    "BREAKING: Elon Musk has just confirmed that he will take a more aggressive approach with DOGE, following a request from President Trump earlier today.",
+    "JUST IN: President Trump says he is going with Elon Musk to inspect Fort Knox gold reserves to ensure it's still there.",
+    "Some wins are so big that everybody wins, even if they're unaware.",
+    "Going for a walk or pacing while on a phone call is a major cognitive power up",
+    "The woke mind virus is an insidious capturer of minds and destroyer of connections to good friends and reality.",
+    "Shall there never be a tyranny such as the one brought about by the Covid “response” measures ever again.",
+    "Many are ignorant of cognitive security because they mistake their arrogance or ego for security until it is beaten by the cognitively secure.",
+    "What’s one quote from Elon Musk that changed your life?",
+    "You only feel life when you share life.\n\nYou don’t even feel rich unless you share being rich.",
+    dedent("""\
+        Be Stephen King:
+        > Constantly makes negative posts
+        > Gets trolled because of it
+        > Then complains about negativity
+        > Leaves
+        > Comes back
+        > Asks if people missed him
+        > Makes more negative posts
+        Rinse and repeat.""")
+]
 
-def get_good_x_post_examples():
-    good_x_post_examples = [
-        "The souls of people are incredible, it's the interface that's manipulated",
-        "We live in the best timeline",
-        "BREAKING: Elon Musk has just confirmed that he will take a more aggressive approach with DOGE, following a request from President Trump earlier today.",
-        "JUST IN: President Trump says he is going with Elon Musk to inspect Fort Knox gold reserves to ensure it's still there.",
-        "Some wins are so big that everybody wins, even if they're unaware.",
-        "Going for a walk or pacing while on a phone call is a major cognitive power up",
-        "The woke mind virus is an insidious capturer of minds and destroyer of connections to good friends and reality.",
-        "Shall there never be a tyranny such as the one brought about by the Covid “response” measures ever again.",
-        "Many are ignorant of cognitive security because they mistake their arrogance or ego for security until it is beaten by the cognitively secure.",
-        "What’s one quote from Elon Musk that changed your life?",
-        "You only feel life when you share life.\n\nYou don’t even feel rich unless you share being rich.",
-        dedent("""\
-            Be Stephen King:
-
-            > Constantly makes negative posts
-            > Gets trolled because of it
-            > Then complains about negativity
-            > Leaves
-            > Comes back
-            > Asks if people missed him
-            > Makes more negative posts
-
-            Rinse and repeat.""")
-    ]
-    return good_x_post_examples
-
-
-
-def call_llm_for_post_creation(articles, prompt_style, good_examples):
-    # Configure the Gemini API key
+def call_llm_for_post_creation(prompt_style, topic, post_length, articles=None):
     genai.configure(api_key=GEMINI_API_KEY)
 
-    prompt = f"""
-Generate an engaging and creative X post (tweet) using the following input:
-
-I will provide you with some fresh articles. Choose randomly one of them as a source of inspiration for creating the X post. 
-Generally, try to be based and not woke.
-There is not need to add hashtags to the post.
-At the end give me only the text that I can post on X, without any comments or stuff that shouldnt be posted.
+    # If "articles" exist
+    if articles:
+        input_section = f"""
+I will provide you with some fresh articles. Choose randomly one of them as a source of inspiration for creating the X post.
 
 News Articles:
 {articles}
+"""
+    # If "articles" don't exist
+    else:
+        input_section = f"""
+I will provide you with a topic. Use this topic as the source of inspiration for creating the X post.
+
+Topic: {topic}
+"""
+    prompt = f"""
+Generate an engaging and creative X post (tweet) using the following input:
+{input_section}
+Generally, try to be based and not woke.
+There is no need to add hashtags to the post.
+At the end, give me only the text that I can post on X, without any comments or stuff that shouldn’t be posted.
 
 Prompt Style: {prompt_style}
+Length: {post_length}
 
 Good X Post Examples:
-{good_examples}
+{good_x_post_examples}
 
 Based on the above, create a unique X post.
 """
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    model = genai.GenerativeModel("gemini-2.0-flash")        
+    blue_text(prompt)
     response = model.generate_content(prompt)
     return response.text
 
