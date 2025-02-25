@@ -14,7 +14,7 @@ OAUTH_TOKEN_SECRET = os.environ.get("OAUTH_TOKEN_SECRET")
 
 def green_text(text):
     # Wrap the text in green ANSI escape codes
-    print(f"\033[32m{text}\033[0m")
+    print(f"\033[32m{text}\033[0m", flush=True)
 
 def decide_topic():
     # List of topics with equal probability
